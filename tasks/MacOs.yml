@@ -1,0 +1,14 @@
+# Run wehn MacOs (only local)
+- name: Found MacOs version
+  debug:
+    msg: "MacOs version {{ ansible_facts['distribution_major_version'] }}"
+
+- name: Tools list
+  debug: var=net_packages
+
+- name: Brew net tools packages
+  homebrew: name={net_packages} state=present
+  tags:
+    - net_tools
+    - packages
+    - general

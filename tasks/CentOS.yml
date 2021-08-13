@@ -1,0 +1,14 @@
+# Run when  OS CentOS
+- name: Centos version
+  debug: var=ansible_facts['distribution_major_version']
+
+- name: Tools list
+  debug: var=net_packages
+
+- name: Install net tools
+  yum: name="{{ net_packages }}" state="present"
+  ignore_errors: yes
+  tags:
+    - net_tools
+    - packages
+    - general

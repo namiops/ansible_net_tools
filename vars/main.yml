@@ -1,0 +1,11 @@
+---
+# vars file for ansible_net_tools
+net_packages:
+  - net-tools
+  - ntp
+  - netcat
+  - netstat
+  - tcpdump
+  - lsof
+  - htop
+  - openssl

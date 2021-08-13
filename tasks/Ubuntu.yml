@@ -1,0 +1,25 @@
+# Run when  OS is Ubuntu
+- name: Found Ubuntu version
+  debug:
+    msg: "Ubuntu version {{ ansible_facts['distribution_major_version'] }}"
+
+- name: Upgrade all existed apt packages
+  apt: upgrade=dist force_apt_get=yes
+
+- name: Enable sudo for installation
+  apt: name=sudo state=present
+  tags:
+    - common
+    - packages
+    - sudo
+
+- name: Tools list
+  debug: var=net_packages
+
+- name: Install net tools packages
+  apt: name={{ net_packages }} state=present
+  ignore_errors: yes
+  tags:
+    - net_tools
+    - packages
+    - general

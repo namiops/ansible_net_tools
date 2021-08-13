@@ -1,0 +1,22 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Ansible package manager
+      debug: var=ansible_pkg_mgr
+
+    - name: Get os information
+      raw: cat /etc/os-release
+      register: os_info
+
+    - name: Os Information
+      debug: var=os_info
+
+    - name: Prepare python for Debian base OS 
+      raw: apt update && apt install -y python
+      when: os_info.stdout.find('ID=debian') != -1
+    
+    - name: Prepare python for Ubuntu base OS 
+      raw:  apt update && apt install -y python3 python3-apt
+      when: os_info.stdout.find('ID=ubuntu') != -1 

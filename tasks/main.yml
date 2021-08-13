@@ -1,0 +1,11 @@
+---
+# tasks file for ansible_net_tools
+- name: Defaut package manager
+  debug: var=ansible_pkg_mgr
+
+- name: Start install net tools  on selected OS
+  include_tasks: "{{ ansible_facts['distribution'] }}.yml"
+
+- name: Start install net tools on MacOs (Homebrew)
+  include_tasks: MacOs.yml
+  when: ansible_pkg_mgr == "homebrew"

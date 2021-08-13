@@ -1,0 +1,15 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: yes
+  tasks:
+  # Verify image facts
+  - name: Print all ansible facts
+    ansible.builtin.debug:
+      var: ansible_facts
+
+  - name: Example assertion
+    assert:
+      that: true
